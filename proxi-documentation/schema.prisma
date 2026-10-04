@@ -1,0 +1,14 @@
+// use prisma-8
+
+generator client {
+    provider = "prisma-client"
+}
+
+model ProxiDevice {
+    proxiId String @id
+    name     String
+}
+
+model ProxiFreinds {
+    proxiA String @relation(fields: [proxiA], references: [ProxiDevice.] )
+}
