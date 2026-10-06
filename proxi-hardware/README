@@ -1,0 +1,5 @@
+Code for the Proxi Hardware. Compatible with both Arduino R4 WiFi and ESP-WROOM-32
+
+Compile for arduino by using the `uno_r4_wifi` environment or running `just upload-uno`
+
+Compile for esp32 by using the `esp32` environment or running `just upload-esp32`

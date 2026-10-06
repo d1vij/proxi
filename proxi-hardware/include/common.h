@@ -3,4 +3,4 @@
  */
 #pragma once
 
-inline const char* BLE_SERVICE_ID = "";
+const char* BLE_SERVICE_ID = "";

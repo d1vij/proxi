@@ -1,15 +1,17 @@
 import { Hono } from "hono";
 
-import { MQTTBroker } from "./broker";
+import { startBroker } from "./broker";
 import ProxiRouter from "$/routers";
+import DummyRouter from "$/routers/dummy";
 
 const app = new Hono();
-const broker = new MQTTBroker();
 
 app.route("/bar", ProxiRouter);
+app.route("/led", DummyRouter);
 
 app.get("/", (c) => {
     return c.text("Hello Hono!");
 });
 
+await startBroker();
 export default app;

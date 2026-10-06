@@ -7,7 +7,7 @@ const authenticateHandler: AuthenticateHandler = () => { }
 const broker = await Aedes.createBroker();
 const server = createServer(broker.handle);
 
-export async function startServer(port = 1883) {
+export async function startBroker(port = 1883) {
     return server.listen(port)
 }
 export function getBroker() {
