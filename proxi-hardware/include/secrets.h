@@ -1,4 +1,4 @@
 #pragma once
 
-const char* WIFI_SSID = "Airtel_AIRTEL_SHIVENDER";
-const char* WIFI_PASSWORD = "Divij@123";
+const char* WIFI_SSID = "Divij";
+const char* WIFI_PASSWORD = "divij@123";
