@@ -17,5 +17,6 @@ const int BUZZER = D9;
 */
 
 const int LED = 19;
+const int BUZZER = 20;
 
 #endif

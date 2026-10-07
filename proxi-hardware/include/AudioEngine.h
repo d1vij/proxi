@@ -19,9 +19,15 @@ class AudioEngine
     // casting happens at initialization
     explicit AudioEngine(uint8_t pin);
 
+    void playTone(const BuzzerNote& melody);
     void playMelody(const BuzzerNote* melody, size_t note_count);
 
     void update();
+
+    /**
+     * plays the audio till completion
+     */
+    void tillEnd();
     void stop();
 
     bool isPlaying() { return is_playing; }
@@ -38,3 +44,5 @@ class AudioEngine
 
     void playNextNote();
 };
+
+extern AudioEngine Buzzer;

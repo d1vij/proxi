@@ -13,7 +13,7 @@ class DebouncedButton
    public:
     const uint8_t pin;
     const unsigned long debounceMs;
-    DebouncedButton(uint8_t pin, unsigned long debounceMs, PinMode mode = INPUT);
+    DebouncedButton(uint8_t pin, unsigned long debounceMs, int mode = INPUT);
 
     bool isPressed();
     void begin();

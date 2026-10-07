@@ -2,7 +2,7 @@
 
 #include <Arduino.h>
 
-DebouncedButton::DebouncedButton(uint8_t pin, unsigned long debounceMs, PinMode mode)
+DebouncedButton::DebouncedButton(uint8_t pin, unsigned long debounceMs, int mode)
     : pin(pin), debounceMs(debounceMs)
 {
     this->pullup = (mode == INPUT_PULLUP);

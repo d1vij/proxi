@@ -2,6 +2,8 @@
 
 #include <Arduino.h>
 
+#include "pins.h"
+
 AudioEngine::AudioEngine(uint8_t pin) : pin(pin)
 {
     pinMode(pin, OUTPUT);
@@ -30,6 +32,26 @@ void AudioEngine::playMelody(const BuzzerNote* melody, size_t note_count)
     // play note immedieately and
     // dont wait for the first update() call
     playNextNote();
+}
+
+/**
+ * non blocking function to play a single tone.
+ * it overwrittes the previous melody
+ */
+void AudioEngine::playTone(const BuzzerNote& note)
+{
+    curr_melody = nullptr;
+    melody_length = 0;
+    curr_note_idx = 0;
+
+    curr_note_duration = note.duration;
+    curr_note_start_time = millis();
+    is_playing = true;
+    if (note.freq > 0) {
+        tone(pin, note.freq);
+    } else {
+        noTone(pin);
+    }
 }
 
 void AudioEngine::playNextNote()
@@ -67,3 +89,12 @@ void AudioEngine::update()
         }
     }
 }
+
+void AudioEngine::tillEnd()
+{
+    if (!is_playing) return;
+
+    while (isPlaying()) update();
+}
+
+AudioEngine Buzzer(BUZZER);
