@@ -6,8 +6,12 @@
 
 #if IS_ARDUINO
 
-const int LED = D10;
-const int BUZZER = D9;
+const int BUZZER = D8;
+
+const int BTN_RIGHT = D12;
+const int BTN_UP = D11;
+const int BTN_DOWN = D10;
+const int BTN_LEFT = D9;
 
 #else
 
@@ -16,7 +20,6 @@ const int BUZZER = D9;
     on board D19 on board would be 19 in code
 */
 
-const int LED = 19;
 const int BUZZER = 20;
 
 #endif

@@ -17,8 +17,8 @@
 #include "DebouncedButton.h"
 #include "DebouncedCallback.h"
 #include "Display.h"
+#include "MenuState.h"
 #include "ProxiID.h"
-// #include "MenuState.h"
 #include "audio_samples.h"
 #include "pins.h"
 #include "platform.h"
@@ -26,8 +26,6 @@
 
 WiFiClient wifi;
 HttpClient http(wifi, "192.168.1.8", 3000);
-
-bool state = false;
 
 void init_wifi()
 {
@@ -80,6 +78,7 @@ void check_wifi_conn()
         init_wifi();
     }
 }
+DebouncedCallback db_check_wifi_conn(check_wifi_conn, 5000);
 
 // ---
 
@@ -106,41 +105,59 @@ void setup()
     Display::print("setting up proxi");
     init_wifi();
 
-    pinMode(LED, OUTPUT);
-
     Serial.println("board initialized");
 
     Buzzer.playMelody(Chimes::startupChime, std::size(Chimes::startupChime));
     Buzzer.tillEnd();
     delay(1000);
     Buzzer.playTone({.freq = 440, .duration = 1000});
-
-    // std::vector<menu_item_title_t> items = {"first", "second"};
-    // Menu.display(items);
 }
 
-void toggle_led()
-{
-    JsonDocument doc;
-    doc["current"] = state;
-
-    String body;
-    serializeJson(doc, body);
-
-    http.post("/led/toggle", "application/json", body);
-
-    deserializeJson(doc, http.responseBody());
-    state = doc["led"];
-
-    digitalWrite(LED, state);
-}
-
-DebouncedCallback db_check_wifi_conn(check_wifi_conn, 5000);
-DebouncedCallback db_toggle_led(toggle_led, 1000);
+void status() { Serial.println("alive"); }
+DebouncedCallback db_status(status, 1000);
 
 void loop()
 {
-    Buzzer.update();
     // db_toggle_led.call();
     // db_check_wifi_conn.call();
+
+    Buzzer.update();
+
+    static std::vector<menu_item_title_t> items = {"first", "second", "third", "fourth"};
+
+    if (menu_btn_left.isPressed() && (Menu.state() != MENU_STATE_ACTION::MENU_NAVIGATING)) {
+        Menu.set_items(items);
+    }
+
+    if (Menu.state() == MENU_STATE_ACTION::MENU_NAVIGATING) {
+        if (menu_btn_left.isPressed()) {
+            Menu.
+        }
+
+        if (menu_btn_up.isPressed()) {
+            Serial.println("up pressed");
+            Menu.prevItem();
+            Buzzer.playTone({440, 50});
+        }
+
+        else if (menu_btn_down.isPressed()) {
+            Serial.println("down pressed");
+            Menu.nextItem();
+            Buzzer.playTone({440, 50});
+        }
+    }
+
+    if (Menu.state() == MENU_STATE_ACTION::MENU_SELECTED) {
+        if (Menu.has_updated()) {
+            menu_item_title_t selected = items[Menu.selected()];
+            // NOTE: I WAS HERE THINKING HOW THE MENU FLOW WOULD WORK OUT
+            Display::
+        }
+
+        if (menu_btn_left.isPressed()) {
+            Menu.close();
+        }
+    }
+
+    Menu.display();
 }

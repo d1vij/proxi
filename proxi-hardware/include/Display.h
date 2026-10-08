@@ -5,22 +5,23 @@
 
 #include "LiquidCrystal_I2C.h"
 
-const int LCD_I2C_ADDR = 0x27;
+static const int LCD_I2C_ADDR = 0x27;
 
-const int LCD_ROWS = 2;
-const int LCD_COLS = 16;
+static const int LCD_ROWS = 2;
+static const int LCD_COLS = 16;
 
 // clang-format off
-const char EMPTY_LINE[] = {
+static const char EMPTY_LINE[] = {
     ' ', ' ', ' ', ' ',
     ' ', ' ', ' ', ' ',
     ' ', ' ', ' ', ' ',
     ' ', ' ', ' ', ' ',
     '\0'
 };
+
 // clang-format on
 
-void pad_string(std::string& s, size_t len = LCD_COLS)
+static void pad_string(std::string& s, size_t len = LCD_COLS)
 {
     if (s.length() < len) {
         s.resize(len, ' ');
