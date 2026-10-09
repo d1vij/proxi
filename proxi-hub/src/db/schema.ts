@@ -11,6 +11,7 @@ import { sql } from "drizzle-orm";
 
 export const proxiInfoTable = sqliteTable("proxi_info", {
     proxiId: text().primaryKey(),
+    proxiName: text().notNull()
 });
 
 export const ProxiInfoInsertSchema = createInsertSchema(proxiInfoTable);
@@ -31,3 +32,4 @@ export const friendsTable = sqliteTable(
         index("proxi_friend_b_index").on(t.proxiB),
     ],
 );
+export const ProxiFriendInsertSchema = createInsertSchema(friendsTable);

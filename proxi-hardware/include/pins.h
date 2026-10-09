@@ -20,6 +20,11 @@ const int BTN_LEFT = D9;
     on board D19 on board would be 19 in code
 */
 
-const int BUZZER = 20;
+const int BUZZER = 25;
+
+const int BTN_RIGHT = 4;
+const int BTN_UP = 19;
+const int BTN_DOWN = 5;
+const int BTN_LEFT = 18;
 
 #endif
