@@ -5,7 +5,7 @@
 #include "Display.h"
 #include "MenuState.h"
 
-typedef enum SYSTEM_STATES { FINE, ERROR };
+enum SYSTEM_STATES { FINE, ERROR };
 static SYSTEM_STATES SYSTEM_STATE = FINE;
 static std::string SYSTEM_ERROR = "";
 

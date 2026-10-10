@@ -6,18 +6,20 @@
 
 #if IS_ARDUINO
 
-const int BUZZER = D8;
+const int BUZZER = 5;
 
-const int BTN_RIGHT = D12;
-const int BTN_UP = D11;
-const int BTN_DOWN = D10;
-const int BTN_LEFT = D9;
+const int BTN_RIGHT = A0;
+const int BTN_DOWN = A1;
+const int BTN_UP = A2;
+const int BTN_LEFT = A3;
+
+const int RC522_RST = 2;  // Reset
+const int RC522_SS = 10;  // Slave Select / CS (Moved off D3 for SPI standard)
 
 #else
 
 /*
-    INFO: for esp32 the gpio pin number is equal to the one displayed
-    on board D19 on board would be 19 in code
+    INFO: ESP32 GPIO Pin Mapping
 */
 
 const int BUZZER = 25;

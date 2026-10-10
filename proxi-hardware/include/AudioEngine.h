@@ -2,7 +2,7 @@
 
 #include <array>
 
-typedef struct BuzzerNote {
+struct BuzzerNote {
     uint32_t freq;
     uint64_t duration;
 };
